@@ -6,15 +6,6 @@
 name: helloworld-kim
 type: Load Balanced Web Service
 
-# Distribute traffic to your service.
-http:
-  # Requests to this path will be forwarded to your service.
-  # To match all requests you can use the "/" path.
-  path: '/'
-  # You can specify a custom health check path. The default is "/".
-  # healthcheck: '/'
-  alias: helloworldkim.pasartrainer.com
-
 # Configuration for your containers and service.
 image:
   # Docker build arguments. For additional overrides: https://aws.github.io/copilot-cli/docs/manifest/lb-web-service/#image-build
@@ -41,6 +32,17 @@ exec: true     # Enable running commands in your container.
 #    count: 2               # Number of tasks to run for the "test" environment.
 environments:
  test:
+    http:
+      path: '/'
+      alias: helloworldkim.pasartrainer.com
+    count:
+      spot: 1
+    variables:
+      NEXT_PUBLIC_APP_CODE: "pttp"
+ live:
+    http:
+      path: '/'
+      alias: helloworldlive.pasartrainer.com
     count:
       spot: 1
     variables:
