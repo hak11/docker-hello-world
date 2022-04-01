@@ -1,19 +1,19 @@
-# The manifest for the "hello-kim-test" service.
+# The manifest for the "helloworld-kim" service.
 # Read the full specification for the "Load Balanced Web Service" type at:
 #  https://aws.github.io/copilot-cli/docs/manifest/lb-web-service/
 
 # Your service name will be used in naming your resources like log groups, ECS services, etc.
-name: hello-kim-test
+name: helloworld-kim
 type: Load Balanced Web Service
 
 # Distribute traffic to your service.
 http:
   # Requests to this path will be forwarded to your service.
   # To match all requests you can use the "/" path.
-  path: 'hello-kim-test'
+  path: '/'
   # You can specify a custom health check path. The default is "/".
   # healthcheck: '/'
-  alias: hellohakimtest.pasartrainer.com
+  alias: helloworldkim.pasartrainer.com
 
 # Configuration for your containers and service.
 image:
@@ -39,3 +39,9 @@ exec: true     # Enable running commands in your container.
 #environments:
 #  test:
 #    count: 2               # Number of tasks to run for the "test" environment.
+environments:
+ test:
+    count:
+      spot: 1
+    variables:
+      NEXT_PUBLIC_APP_CODE: "pttp"
